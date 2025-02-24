@@ -1,32 +1,31 @@
 package com.example.listes_fragments;
 
-
 import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
 
 public class DetailActivity extends AppCompatActivity {
-
-    private TextView countryNameTextView, capitalTextView;
-    private ImageView countryFlagImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        countryNameTextView = findViewById(R.id.countryNameTextView);
-        capitalTextView = findViewById(R.id.capitalTextView);
-        countryFlagImageView = findViewById(R.id.countryFlagImageView);
+        ImageView countryFlagImageView = findViewById(R.id.countryFlagImageView);
+        TextView countryNameTextView = findViewById(R.id.countryNameTextView);
+        TextView capitalTextView = findViewById(R.id.capitalTextView);
+        TextView populationTextView = findViewById(R.id.populationTextView);
+        TextView regionTextView = findViewById(R.id.regionTextView);
 
-        // Récupérer l'objet `Country` depuis l'intent
         Country country = (Country) getIntent().getSerializableExtra("country");
 
         if (country != null) {
+            countryFlagImageView.setImageResource(country.getFlagResource());
             countryNameTextView.setText(country.getName());
             capitalTextView.setText("Capitale : " + country.getCapital());
-            countryFlagImageView.setImageResource(country.getFlagResource());
+            populationTextView.setText(country.getPopulation());
+            regionTextView.setText(country.getRegion());
         }
     }
 }

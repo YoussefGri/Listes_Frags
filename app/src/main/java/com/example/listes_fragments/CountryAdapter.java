@@ -5,20 +5,25 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import java.util.ArrayList;
 import java.util.List;
 
-public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CountryViewHolder> {
+public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CountryViewHolder> implements Filterable {
 
     private Context context;
     private List<Country> countryList;
+    private List<Country> countryListFull;
 
     public CountryAdapter(Context context, List<Country> countryList) {
         this.context = context;
         this.countryList = countryList;
+        this.countryListFull = new ArrayList<>(countryList);
     }
 
     @NonNull
@@ -46,6 +51,41 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CountryV
     public int getItemCount() {
         return countryList.size();
     }
+
+    @Override
+    public Filter getFilter() {
+        return countryFilter;
+    }
+
+    private Filter countryFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Country> filteredList = new ArrayList<>();
+
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.addAll(countryListFull);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for (Country country : countryListFull) {
+                    if (country.getName().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(country);
+                    }
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            countryList.clear();
+            countryList.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
 
     public static class CountryViewHolder extends RecyclerView.ViewHolder {
         TextView countryName;
