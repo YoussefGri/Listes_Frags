@@ -5,9 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomePage"
-    android:padding="24dp">
+    android:padding="24dp"
+    android:background="@color/background_color"
+    tools:context=".HomePage">
 
+    <!-- Titre -->
     <TextView
         android:id="@+id/titleText"
         android:layout_width="wrap_content"
@@ -15,11 +17,13 @@
         android:text="Choisissez une version"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:textColor="@android:color/black"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="32dp"/>
+        android:layout_marginTop="50dp"/>
 
+    <!-- Bouton pour la version avec Activités -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnActivityVersion"
         android:layout_width="0dp"
@@ -28,8 +32,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/titleText"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginTop="32dp"/>
 
+    <!-- Bouton pour la version avec Fragments -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnFragmentVersion"
         android:layout_width="0dp"
@@ -37,6 +42,7 @@
         android:text="Version Fragments"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnActivityVersion"/>
+        app:layout_constraintTop_toBottomOf="@id/btnActivityVersion"
+        android:layout_marginTop="16dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

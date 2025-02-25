@@ -3,33 +3,45 @@ package com.example.listes_fragments;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
-import androidx.appcompat.app.AppCompatActivity;
+import android.view.ViewGroup;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.android.material.textfield.TextInputEditText;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class CountryListFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private CountryAdapter adapter;
     private List<Country> countryList;
-    private CircularProgressIndicator progressIndicator;
     private TextInputLayout searchLayout;
+    private TextInputEditText searchEditText;
+    private OnCountrySelectedListener listener;
 
+    public interface OnCountrySelectedListener {
+        void onCountrySelected(Country country);
+    }
+
+    public void setOnCountrySelectedListener(OnCountrySelectedListener listener) {
+        this.listener = listener;
+    }
+
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_country_list);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_country_list, container, false);
 
-        recyclerView = findViewById(R.id.recyclerView);
-        progressIndicator = findViewById(R.id.progressIndicator);
-        searchLayout = findViewById(R.id.searchLayout);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView = view.findViewById(R.id.recyclerView);
+        searchLayout = view.findViewById(R.id.searchLayout);
+        searchEditText = view.findViewById(R.id.searchEditText);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         // ✅ Remplir la liste des pays
         countryList = new ArrayList<>();
@@ -38,25 +50,24 @@ public class MainActivity extends AppCompatActivity {
         countryList.add(new Country("Japon", "Tokyo", R.drawable.japan_flag, "126 000 000", "Asie"));
         countryList.add(new Country("Maroc", "Rabat", R.drawable.morocco_flag, "37 000 000", "Afrique"));
 
-        // ✅ Utilisation du constructeur sans `listener`
-        adapter = new CountryAdapter(this, countryList);
+        // ✅ Passer le `listener` correctement
+        adapter = new CountryAdapter(getContext(), countryList, listener);
         recyclerView.setAdapter(adapter);
 
-        // ✅ Masquer la barre de progression une fois les données chargées
-        progressIndicator.setVisibility(View.GONE);
-
-        // ✅ Gérer la recherche avec un `TextWatcher`
-        searchLayout.getEditText().addTextChangedListener(new TextWatcher() {
+        // ✅ Gérer la recherche
+        searchEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                adapter.getFilter().filter(s); // Appliquer le filtre
+                adapter.getFilter().filter(s);
             }
 
             @Override
             public void afterTextChanged(Editable s) {}
         });
+
+        return view;
     }
 }

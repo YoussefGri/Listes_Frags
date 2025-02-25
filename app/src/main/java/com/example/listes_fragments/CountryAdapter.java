@@ -19,11 +19,19 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CountryV
     private Context context;
     private List<Country> countryList;
     private List<Country> countryListFull;
+    private CountryListFragment.OnCountrySelectedListener listener; // Peut être null pour la version activités
 
-    public CountryAdapter(Context context, List<Country> countryList) {
+    // ✅ Constructeur pour les fragments (avec listener)
+    public CountryAdapter(Context context, List<Country> countryList, CountryListFragment.OnCountrySelectedListener listener) {
         this.context = context;
         this.countryList = countryList;
         this.countryListFull = new ArrayList<>(countryList);
+        this.listener = listener;
+    }
+
+    // ✅ Constructeur pour les activités (sans listener)
+    public CountryAdapter(Context context, List<Country> countryList) {
+        this(context, countryList, null); // Appelle le premier constructeur avec `listener = null`
     }
 
     @NonNull
@@ -39,11 +47,15 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CountryV
         holder.countryName.setText(country.getName());
         holder.countryFlag.setImageResource(country.getFlagResource());
 
-        // Gérer le clic pour ouvrir `DetailActivity`
+        // ✅ Vérifie si un listener est défini (Fragments) ou sinon ouvre l'Activity
         holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, DetailActivity.class);
-            intent.putExtra("country", country);
-            context.startActivity(intent);
+            if (listener != null) {
+                listener.onCountrySelected(country);
+            } else {
+                Intent intent = new Intent(context, DetailActivity.class);
+                intent.putExtra("country", country);
+                context.startActivity(intent);
+            }
         });
     }
 
@@ -76,6 +88,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CountryV
 
             FilterResults results = new FilterResults();
             results.values = filteredList;
+            results.count = filteredList.size();
             return results;
         }
 
