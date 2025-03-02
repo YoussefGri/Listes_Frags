@@ -21,7 +21,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CountryV
     private List<Country> countryListFull;
     private CountryListFragment.OnCountrySelectedListener listener; // Peut être null pour la version activités
 
-    // ✅ Constructeur pour les fragments (avec listener)
+    // Constructeur pour les fragments (avec listener)
     public CountryAdapter(Context context, List<Country> countryList, CountryListFragment.OnCountrySelectedListener listener) {
         this.context = context;
         this.countryList = countryList;
@@ -47,7 +47,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CountryV
         holder.countryName.setText(country.getName());
         holder.countryFlag.setImageResource(country.getFlagResource());
 
-        // ✅ Vérifie si un listener est défini (Fragments) ou sinon ouvre l'Activity
+        // Vérifie si un listener est défini (Fragments) ou sinon ouvre l'Activity
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onCountrySelected(country);

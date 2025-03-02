@@ -17,7 +17,7 @@ public class CountryDetailFragment extends Fragment {
     private ImageView countryFlagImageView;
     private TextView countryNameTextView, capitalTextView, populationTextView, regionTextView;
     private FloatingActionButton shareButton;
-    private Country country; // Stocker l'objet pays sélectionné
+    private Country country;
 
     public static CountryDetailFragment newInstance(Country country) {
         CountryDetailFragment fragment = new CountryDetailFragment();
@@ -45,9 +45,9 @@ public class CountryDetailFragment extends Fragment {
             if (country != null) {
                 countryFlagImageView.setImageResource(country.getFlagResource());
                 countryNameTextView.setText(country.getName());
-                capitalTextView.setText("Capitale : " + country.getCapital());
-                populationTextView.setText("Population : " + country.getPopulation());
-                regionTextView.setText("Région : " + country.getRegion());
+                capitalTextView.setText(country.getCapital());
+                populationTextView.setText(country.getPopulation());
+                regionTextView.setText(country.getRegion());
 
                 // Associer la fonction de partage au bouton
                 shareButton.setOnClickListener(v -> shareCountryInfo());
@@ -57,23 +57,22 @@ public class CountryDetailFragment extends Fragment {
         return view;
     }
 
-    /**
-     * Partage les informations du pays sélectionné via différentes applications.
-     */
+    //Partage les informations du pays sélectionné via différentes applications.
+
     private void shareCountryInfo() {
         if (country == null) return; // Vérifier si le pays est bien chargé
 
-        String shareText = "🌍 Découvrez " + country.getName() + " !\n\n"
-                + "🏛 Capitale : " + country.getCapital() + "\n"
-                + "👥 Population : " + country.getPopulation() + "\n"
-                + "📍 Région : " + country.getRegion() + "\n\n"
-                + "📲 Partagé via l'application Pays du Monde.";
+        String shareText = " 🌏 " + getString(R.string.discover) + country.getName() + " !\n\n"
+                + "🏛 " + getString(R.string.capital) + country.getCapital() + "\n"
+                + "👥 " + getString(R.string.population) + country.getPopulation() + "\n"
+                + "📍 " + getString(R.string.region) + country.getRegion() + "\n\n"
+                + "📲 " + getString(R.string.shared_via);
 
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
         shareIntent.putExtra(Intent.EXTRA_TEXT, shareText);
 
         // Ouvre le menu de partage natif
-        startActivity(Intent.createChooser(shareIntent, "Partager via"));
+        startActivity(Intent.createChooser(shareIntent, getString(R.string.share_via)));
     }
 }

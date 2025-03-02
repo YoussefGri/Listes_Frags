@@ -3,7 +3,7 @@ package com.example.listes_fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
-import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
 
 public class HomePage extends AppCompatActivity {
 
@@ -12,17 +12,17 @@ public class HomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        MaterialButton btnActivityVersion = findViewById(R.id.btnActivityVersion);
-        MaterialButton btnFragmentVersion = findViewById(R.id.btnFragmentVersion);
+        MaterialCardView cardActivityVersion = findViewById(R.id.cardActivityVersion);
+        MaterialCardView cardFragmentVersion = findViewById(R.id.cardFragmentVersion);
 
         // Bouton pour lancer la version avec Activités
-        btnActivityVersion.setOnClickListener(v -> {
+        cardActivityVersion.setOnClickListener(v -> {
             Intent intent = new Intent(HomePage.this, MainActivity.class);
             startActivity(intent);
         });
 
         // Bouton pour lancer la version avec Fragments
-        btnFragmentVersion.setOnClickListener(v -> {
+        cardFragmentVersion.setOnClickListener(v -> {
             Intent intent = new Intent(HomePage.this, FragmentMainActivity.class);
             startActivity(intent);
         });

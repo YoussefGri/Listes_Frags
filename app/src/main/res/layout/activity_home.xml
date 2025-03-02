@@ -5,44 +5,113 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp"
     android:background="@color/background_color"
-    tools:context=".HomePage">
+    tools:context=".HomePage"
+    android:padding="24dp">
 
     <!-- Titre -->
     <TextView
         android:id="@+id/titleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Choisissez une version"
-        android:textSize="24sp"
+        android:text="@string/choose_version"
+        android:textSize="28sp"
         android:textStyle="bold"
-        android:textColor="@android:color/black"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/text_primary"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/cardActivityVersion"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="50dp"/>
+        app:layout_constraintVertical_chainStyle="packed"
+        android:layout_marginBottom="32dp"/>
 
-    <!-- Bouton pour la version avec Activités -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnActivityVersion"
+    <!-- Bouton pour la version Activités -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardActivityVersion"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Version Activités"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/stroke_color"
         app:layout_constraintTop_toBottomOf="@id/titleText"
-        android:layout_marginTop="32dp"/>
-
-    <!-- Bouton pour la version avec Fragments -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnFragmentVersion"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Version Fragments"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnActivityVersion"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintBottom_toTopOf="@id/cardFragmentVersion"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:gravity="center_vertical">
+
+            <!-- Icône -->
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_activity"
+                android:layout_marginEnd="16dp"
+                android:contentDescription="Icône Activités"/>
+
+            <!-- Texte du bouton -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/v_activities"
+                android:textSize="18sp"
+                android:textColor="@color/text_primary"
+                android:fontFamily="sans-serif-medium"/>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Bouton pour la version Fragments -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardFragmentVersion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/stroke_color"
+        app:layout_constraintTop_toBottomOf="@id/cardActivityVersion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="32dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:gravity="center_vertical">
+
+            <!-- Icône -->
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_fragment"
+                android:layout_marginEnd="16dp"
+                android:contentDescription="Icône Fragments"/>
+
+            <!-- Texte du bouton -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/v_fragments"
+                android:textSize="18sp"
+                android:textColor="@color/text_primary"
+                android:fontFamily="sans-serif-medium"/>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

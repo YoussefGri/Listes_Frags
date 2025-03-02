@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Lists_Fragments</string>
+    <string name="capital">Capital</string>
+    <string name="population">Population</string>
+    <string name="region">Region</string>
+    <string name="shared_via">Shared via the World Countries app.\n</string>
+    <string name="discover">Discover</string>
+    <string name="france">France</string>
+    <string name="usa">USA</string>
+    <string name="japan">Japan</string>
+    <string name="moroco">Morocco</string>
+    <string name="europe">Europe</string>
+    <string name="north_america">North America</string>
+    <string name="asia">Asia</string>
+    <string name="africa">Africa</string>
+    <string name="share_via">Share via</string>
+    <string name="choose_version">Please choose a version</string>
+    <string name="v_activities">Activities Version</string>
+    <string name="v_fragments">Fragments Version</string>
+    <string name="search_country">Search for a country</string>
+</resources>

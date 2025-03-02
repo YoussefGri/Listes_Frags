@@ -50,7 +50,7 @@
         android:id="@+id/capitalLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Capitale"
+        android:text="@string/capital"
         android:textSize="16sp"
         android:fontFamily="sans-serif-medium"
         android:textColor="@color/text_secondary"
@@ -95,7 +95,7 @@
             android:id="@+id/populationLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Population"
+            android:text="@string/population"
             android:textSize="16sp"
             android:fontFamily="sans-serif-medium"
             android:textColor="@color/text_secondary"/>
@@ -115,7 +115,7 @@
             android:id="@+id/regionLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Région"
+            android:text="@string/region"
             android:textSize="16sp"
             android:fontFamily="sans-serif-medium"
             android:textColor="@color/text_secondary"/>
@@ -128,7 +128,7 @@
             android:fontFamily="sans-serif"
             android:textColor="@color/text_primary"
             android:layout_marginTop="4dp"
-            tools:text="Europe"/>
+            tools:text="@string/europe"/>
     </LinearLayout>
 
     <!-- Bouton de partage -->

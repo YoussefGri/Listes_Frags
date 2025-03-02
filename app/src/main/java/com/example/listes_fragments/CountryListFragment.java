@@ -43,18 +43,18 @@ public class CountryListFragment extends Fragment {
         searchEditText = view.findViewById(R.id.searchEditText);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // ✅ Remplir la liste des pays
+        // Remplissage de la liste des pays
         countryList = new ArrayList<>();
-        countryList.add(new Country("France", "Paris", R.drawable.france_flag, "67 000 000", "Europe"));
-        countryList.add(new Country("USA", "Washington D.C.", R.drawable.usa_flag, "331 000 000", "Amérique du Nord"));
-        countryList.add(new Country("Japon", "Tokyo", R.drawable.japan_flag, "126 000 000", "Asie"));
-        countryList.add(new Country("Maroc", "Rabat", R.drawable.morocco_flag, "37 000 000", "Afrique"));
+        countryList.add(new Country(getString(R.string.france), "Paris", R.drawable.france_flag, "67 000 000", getString(R.string.europe)));
+        countryList.add(new Country(getString(R.string.usa), "Washington D.C.", R.drawable.usa_flag, "331 000 000", getString(R.string.north_america)));
+        countryList.add(new Country(getString(R.string.japan), "Tokyo", R.drawable.japan_flag, "126 000 000", getString(R.string.asia)));
+        countryList.add(new Country(getString(R.string.moroco), "Rabat", R.drawable.morocco_flag, "37 000 000", getString(R.string.africa)));
 
-        // ✅ Passer le `listener` correctement
+        // passage du listener
         adapter = new CountryAdapter(getContext(), countryList, listener);
         recyclerView.setAdapter(adapter);
 
-        // ✅ Gérer la recherche
+        // recherche
         searchEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
